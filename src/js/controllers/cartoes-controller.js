@@ -30,6 +30,26 @@ angular.module('ceep')
       }
   }
 
+  $scope.sincroniza = function () {
+    $scope.esperando = true;
+    $scope.sincronizado = false;
+    $scope.deuRuim = false;
+
+    $http.post(CEEP_URL + '/salvar', {
+      usuario: usuario,
+      cartoes: $scope.cartoes
+    })
+    .success(function () {
+      $scope.sincronizado = true;
+    })
+    .error(function () {
+      $scope.deuRuim = true;
+    })
+    .finally(function () {
+      $scope.esperando = false;
+    });
+  }
+
   function trataConteudoCartao (texto) {
     return texto.trim().replace(/\n/g, '<br>').replace(/\*\*([\w ]+)\*\*/g, '<strong>$1</strong>');
   }
