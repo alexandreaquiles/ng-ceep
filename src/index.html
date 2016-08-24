@@ -28,7 +28,7 @@
         <div class="opcoesDaPagina">
             <input type="search" id="busca" class="opcoesDaPagina-opcao" placeholder="busca" ng-model="busca">
             <button id="mudalayout" class="opcoesDaPagina-opcao opcoesDaPagina-botao" ng-click="emLinhas = !emLinhas">{{emLinhas ? 'Blocos' : 'Linhas'}}</button>
-            <button id="ajuda" class="opcoesDaPagina-opcao opcoesDaPagina-botao">?</button>
+            <button id="ajuda" class="opcoesDaPagina-opcao opcoesDaPagina-botao" ng-click="buscaAjuda()">?</button>
             <button id="sync" class="opcoesDaPagina-opcao opcoesDaPagina-botao botaoSync">
                 <svg height="1em" viewBox="0 0 384 384">
                     <title>sincronizar</title>

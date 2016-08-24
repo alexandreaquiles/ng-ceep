@@ -42,6 +42,19 @@ angular.module('ceep')
     $scope.novoCartao = {};
   }
 
+  $scope.clicouAjuda = false;
+  $scope.buscaAjuda = function () {
+    if (! $scope.clicouAjuda) {
+      $http.get(CEEP_URL + '/instrucoes')
+      .success(function (dados) {
+        angular.forEach(dados.instrucoes, function (cartao) {
+          $scope.cartoes.unshift(cartao);
+        });
+      });
+      $scope.clicouAjuda = true;
+    }
+  }
+
   $http.jsonp(CEEP_URL + '/carregar?callback=JSON_CALLBACK', {
     params: {
       usuario: usuario
