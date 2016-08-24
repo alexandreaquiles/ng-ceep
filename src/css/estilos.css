@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background: #e8e8e8;
+}
+.ng-cloak {
+  display: none;
+}
+.container {
+    padding: 0 10%;
+}
+.cabecalho {
+    background: #0082c7;
+}
+.cartao {
+    background: #ebef40;
+    margin: 16px;
+    padding: 16px;
+}
+#mudalayout {
+    display: none;
+}
+@media(min-width: 560px) {
+    .cartao {
+        width: 190px;
+        display: inline-block;
+        box-sizing: border-box;
+        text-align: left;
+        flex-grow: 1;
+        flex-basis: 190px;
+    }
+    .mural {
+        display: flex;
+        text-align: center;
+        flex-wrap: wrap;
+    }
+    .mural--linhas .cartao {
+        display: block;
+        width: auto;
+        flex-basis: auto;
+    }
+    .mural--linhas {
+        flex-direction: column;
+    }
+    #mudalayout {
+        display: inline-block;
+    }
+}
