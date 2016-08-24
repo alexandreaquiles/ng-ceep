@@ -44,7 +44,7 @@
         <input type="submit" value="Salvar" class="novoCartao-salvar">
     </form>
     <section class="container mural" ng-class="{'mural--linhas': emLinhas}">
-      <div class="cartao {{decideTipoCartao(cartao.conteudo)}}" id="{{cartao.id}}" style="background-color: {{cartao.cor}}" ng-repeat="cartao in cartoes | filter: { conteudo: busca}">
+      <div class="cartao" ng-class="{'cartao--textoGrande':tipo(cartao.conteudo)=='G','cartao--textoMedio':tipo(cartao.conteudo)=='M','cartao--textoPequeno':tipo(cartao.conteudo)=='P'}" id="{{cartao.id}}" style="background-color: {{cartao.cor}}" ng-repeat="cartao in cartoes | filter: { conteudo: busca}">
       		<div class="opcoesDoCartao">
       			<button class="opcoesDoCartao-opcao opcoesDoCartao-remove" ng-click="removeCartao(cartao)">Remover</button>
       			<div class="opcoesDoCartao-cores">

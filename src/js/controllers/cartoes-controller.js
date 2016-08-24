@@ -8,7 +8,7 @@ angular.module('ceep')
                {nome: "Tarefa", codigo: "#92C4EC"},
                {nome: "Inspiração", codigo: "#76EF40"}];
 
-  $scope.decideTipoCartao = function (texto) {
+  $scope.tipo = function (texto) {
       var quebras, textoSemQuebras, letras, palavras, maiorPalavra, tamanhoMaiorPalavra;
       quebras = texto.split('<br>').length - 1;
       textoSemQuebras = texto.replace(/<br>/g, '');
@@ -22,11 +22,11 @@ angular.module('ceep')
       });
       tamanhoMaiorPalavra = maiorPalavra.length;
       if (quebras < 5 && letras < 55 && tamanhoMaiorPalavra < 9) {
-          return 'cartao--textoGrande';
+          return 'G';
       } else if (quebras < 6 && letras < 75 && tamanhoMaiorPalavra < 12) {
-          return 'cartao--textoMedio';
+          return 'M';
       } else {
-          return 'cartao--textoPequeno';
+          return 'P';
       }
   }
 
