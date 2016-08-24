@@ -1,5 +1,5 @@
 angular.module('ceep')
-.controller('CartoesController', function ($scope, $http) {
+.controller('CartoesController', function ($scope, $http, ceepService) {
   var CEEP_URL = 'http://ceep.herokuapp.com/cartoes';
   var usuario = 'fulano@bol.com.br';
 
@@ -35,10 +35,7 @@ angular.module('ceep')
     $scope.sincronizado = false;
     $scope.deuRuim = false;
 
-    $http.post(CEEP_URL + '/salvar', {
-      usuario: usuario,
-      cartoes: $scope.cartoes
-    })
+    ceepService.enviaCartoes($scope.cartoes)
     .success(function () {
       $scope.sincronizado = true;
     })
@@ -65,7 +62,7 @@ angular.module('ceep')
   $scope.clicouAjuda = false;
   $scope.buscaAjuda = function () {
     if (! $scope.clicouAjuda) {
-      $http.get(CEEP_URL + '/instrucoes')
+      ceepService.pegaInstrucoes()
       .success(function (dados) {
         angular.forEach(dados.instrucoes, function (cartao) {
           $scope.cartoes.unshift(cartao);
@@ -80,11 +77,7 @@ angular.module('ceep')
     $scope.cartoes.splice(indiceCartao, 1);
   }
 
-  $http.jsonp(CEEP_URL + '/carregar?callback=JSON_CALLBACK', {
-    params: {
-      usuario: usuario
-    }
-  })
+  ceepService.carregaCartoes()
   .success(function (dados) {
     $scope.cartoes = dados.cartoes;
   })
