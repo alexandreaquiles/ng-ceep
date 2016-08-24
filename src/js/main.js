@@ -1,1 +1,1 @@
-angular.module('ceep', ['ngSanitize']);
+angular.module('ceep', ['ngSanitize', 'contenteditable']);
