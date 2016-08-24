@@ -55,6 +55,11 @@ angular.module('ceep')
     }
   }
 
+  $scope.removeCartao = function (cartao) {
+    var indiceCartao = $scope.cartoes.indexOf(cartao);
+    $scope.cartoes.splice(indiceCartao, 1);
+  }
+
   $http.jsonp(CEEP_URL + '/carregar?callback=JSON_CALLBACK', {
     params: {
       usuario: usuario

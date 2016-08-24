@@ -44,7 +44,7 @@
     <section class="container mural" ng-class="{'mural--linhas': emLinhas}">
       <div class="cartao {{decideTipoCartao(cartao.conteudo)}}" id="{{cartao.id}}" style="background-color: {{cartao.cor}}" ng-repeat="cartao in cartoes | filter: { conteudo: busca}">
       		<div class="opcoesDoCartao">
-      			<button class="opcoesDoCartao-opcao opcoesDoCartao-remove" data-cartao="{{cartao.id}}">Remover</button>
+      			<button class="opcoesDoCartao-opcao opcoesDoCartao-remove" ng-click="removeCartao(cartao)">Remover</button>
       			<div class="opcoesDoCartao-cores">
               <span ng-repeat="cor in cores">
                 <input type="radio" class="opcoesDoCartao-radioCor" name="corDoCartao-{{cartao.id}}" id="cor{{cor.nome}}-{{cartao.id}}" value="{{cor.codigo}}">
