@@ -30,6 +30,12 @@ angular.module('ceep')
       }
   }
 
+  $scope.novoCartao = {};
+  $scope.salvaNovoCartao = function () {
+    $scope.cartoes.unshift($scope.novoCartao);
+    $scope.novoCartao = {};
+  }
+
   $http.jsonp(CEEP_URL + '/carregar?callback=JSON_CALLBACK', {
     params: {
       usuario: usuario

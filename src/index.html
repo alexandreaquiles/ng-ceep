@@ -37,8 +37,8 @@
             </button>
         </div>
     </header>
-    <form action="" class="container novoCartao">
-        <textarea class="novoCartao-conteudo" placeholder="Digite aqui"></textarea>
+    <form name="formNovoCartao" class="container novoCartao" ng-submit="salvaNovoCartao()">
+        <textarea name="conteudo" ng-model="novoCartao.conteudo" class="novoCartao-conteudo" placeholder="Digite aqui"></textarea>
         <input type="submit" value="Salvar" class="novoCartao-salvar">
     </form>
     <section class="container mural" ng-class="{'mural--linhas': emLinhas}">
