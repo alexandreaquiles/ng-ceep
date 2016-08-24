@@ -22,11 +22,11 @@
     <!-- endbuild -->
 </head>
 
-<body class="ng-cloak">
+<body class="ng-cloak" ng-controller="CartoesController">
     <header class="cabecalho container">
         <h1 class="cabecalho-logo">Ceep</h1>
         <div class="opcoesDaPagina">
-            <input type="search" id="busca" class="opcoesDaPagina-opcao" placeholder="busca">
+            <input type="search" id="busca" class="opcoesDaPagina-opcao" placeholder="busca" ng-model="busca">
             <button id="mudalayout" class="opcoesDaPagina-opcao opcoesDaPagina-botao">Linhas</button>
             <button id="ajuda" class="opcoesDaPagina-opcao opcoesDaPagina-botao">?</button>
             <button id="sync" class="opcoesDaPagina-opcao opcoesDaPagina-botao botaoSync">
@@ -41,8 +41,8 @@
         <textarea class="novoCartao-conteudo" placeholder="Digite aqui"></textarea>
         <input type="submit" value="Salvar" class="novoCartao-salvar">
     </form>
-    <section class="container mural" ng-controller="CartoesController">
-      <div class="cartao {{decideTipoCartao(cartao.conteudo)}}" id="{{cartao.id}}" style="background-color: {{cartao.cor}}" ng-repeat="cartao in cartoes">
+    <section class="container mural">
+      <div class="cartao {{decideTipoCartao(cartao.conteudo)}}" id="{{cartao.id}}" style="background-color: {{cartao.cor}}" ng-repeat="cartao in cartoes | filter: { conteudo: busca}">
       		<div class="opcoesDoCartao">
       			<button class="opcoesDoCartao-opcao opcoesDoCartao-remove" data-cartao="{{cartao.id}}">Remover</button>
       			<div class="opcoesDoCartao-cores">
