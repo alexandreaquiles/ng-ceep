@@ -1,12 +1,30 @@
 angular.module('ceep')
 .controller('CartoesController', function ($scope, $http, ceepService) {
+
   var CEEP_URL = 'http://ceep.herokuapp.com/cartoes';
   var usuario = 'fulano@bol.com.br';
 
+  $scope.esperando = false;
+  $scope.sincronizado = false;
+  $scope.deuRuim = false;
+  $scope.novoCartao = {};
+  $scope.clicouAjuda = false;
   $scope.cores = [{ nome: "Padrão", codigo: "#EBEF40"},
                {nome: "Importante", codigo: "#F05450"},
                {nome: "Tarefa", codigo: "#92C4EC"},
                {nome: "Inspiração", codigo: "#76EF40"}];
+
+  ceepService.carregaCartoes()
+  .success(function (dados) {
+    $scope.cartoes = dados.cartoes;
+  })
+  .error(function () {
+    console.error('Erro ao carregar cartões do servidor.');
+  });
+
+  function trataConteudoCartao (texto) {
+    return texto.replace(/\n/g, '<br>').replace(/\*\*([\w ]+)\*\*/g, '<strong>$1</strong>');
+  }
 
   $scope.tipo = function (texto) {
       var quebras, textoSemQuebras, letras, palavras, maiorPalavra, tamanhoMaiorPalavra;
@@ -47,11 +65,6 @@ angular.module('ceep')
     });
   }
 
-  function trataConteudoCartao (texto) {
-    return texto.replace(/\n/g, '<br>').replace(/\*\*([\w ]+)\*\*/g, '<strong>$1</strong>');
-  }
-
-  $scope.novoCartao = {};
   $scope.salvaNovoCartao = function () {
     var novoCartao = $scope.novoCartao;
     novoCartao.conteudo = trataConteudoCartao(novoCartao.conteudo);
@@ -59,7 +72,6 @@ angular.module('ceep')
     $scope.novoCartao = {};
   }
 
-  $scope.clicouAjuda = false;
   $scope.buscaAjuda = function () {
     if (! $scope.clicouAjuda) {
       ceepService.pegaInstrucoes()
@@ -77,11 +89,4 @@ angular.module('ceep')
     $scope.cartoes.splice(indiceCartao, 1);
   }
 
-  ceepService.carregaCartoes()
-  .success(function (dados) {
-    $scope.cartoes = dados.cartoes;
-  })
-  .error(function () {
-    console.error('Erro ao carregar cartões do servidor.');
-  });
 });
