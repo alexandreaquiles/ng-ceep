@@ -17,6 +17,7 @@
     <!-- endbuild -->
     <!-- build:js js/app.min.js -->
     <script src="js/lib/angular.min.js"></script>
+    <script src="js/lib/angular-sanitize.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/controllers/cartoes-controller.js"></script>
     <!-- endbuild -->
@@ -52,7 +53,7 @@
               </span>
       			</div>
       		</div>
-      		<p class="cartao-conteudo" contenteditable>{{cartao.conteudo}}</p>
+      		<p class="cartao-conteudo" contenteditable ng-bind-html="cartao.conteudo"></p>
       </div>
     </section>
 </body>

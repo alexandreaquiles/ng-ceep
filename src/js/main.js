@@ -1,1 +1,1 @@
-angular.module('ceep', []);
+angular.module('ceep', ['ngSanitize']);
