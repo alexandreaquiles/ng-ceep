@@ -51,7 +51,7 @@ angular.module('ceep')
   }
 
   function trataConteudoCartao (texto) {
-    return texto.trim().replace(/\n/g, '<br>').replace(/\*\*([\w ]+)\*\*/g, '<strong>$1</strong>');
+    return texto.replace(/\n/g, '<br>').replace(/\*\*([\w ]+)\*\*/g, '<strong>$1</strong>');
   }
 
   $scope.novoCartao = {};

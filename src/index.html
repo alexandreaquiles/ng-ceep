@@ -39,7 +39,7 @@
             </button>
         </div>
     </header>
-    <form name="formNovoCartao" class="container novoCartao" ng-submit="salvaNovoCartao()">
+    <form name="formNovoCartao" class="container novoCartao" ng-submit="novoCartao.conteudo && salvaNovoCartao()">
         <textarea name="conteudo" ng-model="novoCartao.conteudo" class="novoCartao-conteudo" placeholder="Digite aqui"></textarea>
         <input type="submit" value="Salvar" class="novoCartao-salvar">
     </form>
