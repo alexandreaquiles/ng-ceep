@@ -30,9 +30,15 @@ angular.module('ceep')
       }
   }
 
+  function trataConteudoCartao (texto) {
+    return texto.trim().replace(/\n/g, '<br>').replace(/\*\*([\w ]+)\*\*/g, '<strong>$1</strong>');
+  }
+
   $scope.novoCartao = {};
   $scope.salvaNovoCartao = function () {
-    $scope.cartoes.unshift($scope.novoCartao);
+    var novoCartao = $scope.novoCartao;
+    novoCartao.conteudo = trataConteudoCartao(novoCartao.conteudo);
+    $scope.cartoes.unshift(novoCartao);
     $scope.novoCartao = {};
   }
 
