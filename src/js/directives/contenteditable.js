@@ -6,11 +6,21 @@ angular.module('contenteditable', ['ngSanitize'])
      link: function(scope, element, attrs, ngModel) {
        if (!ngModel) return;
 
+       var editEvent = attrs.editEvent;
+       var editEventDelay = attrs.editEventDelay || 500;
+       var timer;
+
        //view -> model
        element.bind('input', function(e) {
          scope.$apply(function() {
            ngModel.$setViewValue(element.html());
            ngModel.$render();
+           if (editEvent) {
+             clearTimeout(timer);
+             timer = setTimeout(function () {
+               scope.$emit(editEvent);
+             }, editEventDelay);
+           }
          });
        });
 
