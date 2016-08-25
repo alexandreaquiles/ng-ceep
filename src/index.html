@@ -50,8 +50,9 @@
       			<button class="opcoesDoCartao-opcao opcoesDoCartao-remove" ng-click="removeCartao(cartao)">Remover</button>
       			<div class="opcoesDoCartao-cores">
               <span ng-repeat="cor in cores">
-                <input type="radio" class="opcoesDoCartao-radioCor" name="corDoCartao-{{cartao.id}}" id="cor{{cor.nome}}-{{cartao.id}}" value="{{cor.codigo}}">
-                <label class="opcoesDoCartao-opcao opcoesDoCartao-cor" for="cor{{cor.nome}}-{{cartao.id}}" style="color: {{cor.codigo}}">{{nome}}</label>
+                <label class="opcoesDoCartao-opcao opcoesDoCartao-cor" style="color: {{cor.codigo}}">
+                  <input type="radio" class="opcoesDoCartao-radioCor"  value="{{cor.codigo}}" ng-click="cartao.cor = cor.codigo">
+                </label>
               </span>
       			</div>
       		</div>
