@@ -33,6 +33,7 @@ angular.module('ceep')
     novoCartao.conteudo = trataConteudoCartao(novoCartao.conteudo);
     $scope.cartoes.unshift(novoCartao);
     $scope.$emit('precisaSincronizar');
+    $scope.$emit('novoCartao-salvo');
     $scope.novoCartao = {};
   }
 

@@ -19,6 +19,7 @@
     <script src="js/lib/angular.min.js"></script>
     <script src="js/lib/angular-sanitize.min.js"></script>
     <script src="js/directives/contenteditable.js"></script>
+    <script src="js/directives/focus-on.js"></script>
     <script src="js/main.js"></script>
     <script src="js/services/ceep-service.js"></script>
     <script src="js/controllers/cartoes-controller.js"></script>
@@ -41,7 +42,7 @@
         </div>
     </header>
     <form name="formNovoCartao" class="container novoCartao" ng-submit="novoCartao.conteudo && salvaNovo()">
-        <textarea name="conteudo" ng-model="novoCartao.conteudo" class="novoCartao-conteudo" placeholder="Digite aqui"></textarea>
+        <textarea name="conteudo" ng-model="novoCartao.conteudo" focus-on="novoCartao-salvo" class="novoCartao-conteudo" placeholder="Digite aqui"></textarea>
         <input type="submit" value="Salvar" class="novoCartao-salvar">
     </form>
     <section class="container mural" ng-class="{'mural--linhas': emLinhas}">
