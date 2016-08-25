@@ -22,11 +22,65 @@ angular.module('ceep')
     console.error('Erro ao carregar cartões do servidor.');
   });
 
+  $scope.tipo = decideTipo;
+
+  $scope.sincroniza = function () {
+    $scope.$emit('precisaSincronizar');
+  }
+
+  $scope.salvaNovo = function () {
+    var novoCartao = $scope.novoCartao;
+    novoCartao.conteudo = trataConteudoCartao(novoCartao.conteudo);
+    $scope.cartoes.unshift(novoCartao);
+    $scope.$emit('precisaSincronizar');
+    $scope.novoCartao = {};
+  }
+
+  $scope.buscaAjuda = function () {
+    if (! $scope.clicouAjuda) {
+      ceepService.pegaInstrucoes()
+      .success(function (dados) {
+        angular.forEach(dados.instrucoes, function (cartao) {
+          $scope.cartoes.unshift(cartao);
+        });
+      });
+      $scope.clicouAjuda = true;
+    }
+  }
+
+  $scope.remove = function (cartao) {
+    var indiceCartao = $scope.cartoes.indexOf(cartao);
+    $scope.cartoes.splice(indiceCartao, 1);
+    $scope.$emit('precisaSincronizar');
+  }
+
+  $scope.mudaCor = function (cartao, cor) {
+    cartao.cor = cor.codigo
+    $scope.$emit('precisaSincronizar');
+  }
+
+  $scope.$on('precisaSincronizar', function () {
+    $scope.esperando = true;
+    $scope.sincronizado = false;
+    $scope.deuRuim = false;
+
+    ceepService.enviaCartoes($scope.cartoes)
+    .success(function () {
+      $scope.sincronizado = true;
+    })
+    .error(function () {
+      $scope.deuRuim = true;
+    })
+    .finally(function () {
+      $scope.esperando = false;
+    });
+  });
+
   function trataConteudoCartao (texto) {
     return texto.replace(/\n/g, '<br>').replace(/\*\*([\w ]+)\*\*/g, '<strong>$1</strong>');
   }
 
-  $scope.tipo = function (texto) {
+  function decideTipo (texto) {
       var quebras, textoSemQuebras, letras, palavras, maiorPalavra, tamanhoMaiorPalavra;
       quebras = texto.split('<br>').length - 1;
       textoSemQuebras = texto.replace(/<br>/g, '');
@@ -46,47 +100,6 @@ angular.module('ceep')
       } else {
           return 'P';
       }
-  }
-
-  $scope.sincroniza = function () {
-    $scope.esperando = true;
-    $scope.sincronizado = false;
-    $scope.deuRuim = false;
-
-    ceepService.enviaCartoes($scope.cartoes)
-    .success(function () {
-      $scope.sincronizado = true;
-    })
-    .error(function () {
-      $scope.deuRuim = true;
-    })
-    .finally(function () {
-      $scope.esperando = false;
-    });
-  }
-
-  $scope.salvaNovoCartao = function () {
-    var novoCartao = $scope.novoCartao;
-    novoCartao.conteudo = trataConteudoCartao(novoCartao.conteudo);
-    $scope.cartoes.unshift(novoCartao);
-    $scope.novoCartao = {};
-  }
-
-  $scope.buscaAjuda = function () {
-    if (! $scope.clicouAjuda) {
-      ceepService.pegaInstrucoes()
-      .success(function (dados) {
-        angular.forEach(dados.instrucoes, function (cartao) {
-          $scope.cartoes.unshift(cartao);
-        });
-      });
-      $scope.clicouAjuda = true;
-    }
-  }
-
-  $scope.removeCartao = function (cartao) {
-    var indiceCartao = $scope.cartoes.indexOf(cartao);
-    $scope.cartoes.splice(indiceCartao, 1);
   }
 
 });
