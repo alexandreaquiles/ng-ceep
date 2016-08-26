@@ -1,3 +1,5 @@
+//baseado em: https://github.com/akatov/angular-contenteditable
+
 angular.module('contenteditable', ['ngSanitize'])
 .directive('contenteditable', function($sce) {
   return {
