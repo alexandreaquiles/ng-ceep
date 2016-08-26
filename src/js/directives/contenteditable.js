@@ -14,7 +14,6 @@ angular.module('contenteditable', ['ngSanitize'])
        element.bind('input', function(e) {
          scope.$apply(function() {
            ngModel.$setViewValue(element.html());
-           ngModel.$render();
            if (editEvent) {
              clearTimeout(timer);
              timer = setTimeout(function () {
