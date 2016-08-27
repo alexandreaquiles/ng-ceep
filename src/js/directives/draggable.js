@@ -12,13 +12,19 @@ angular.module('dragAndDrop', [])
 
       var draggableList = attrs.draggableList;
       var draggableItem = attrs.draggableItem;
+      var dragClass = attrs.dragClass || 'drag-source';
       var dropClass = attrs.dropClass || 'drop-target';
       var dropEvent = attrs.dropEvent || 'drop-done';
 
       element.on('dragstart', function (e) {
+        element.addClass(dragClass);
         e.dataTransfer.effectAllowed = 'move';
         var source = scope.$eval(draggableItem);
         e.dataTransfer.setData('application/x.dnditem+json', angular.toJson(source));
+      });
+
+      element.on('dragend', function () {
+        element.removeClass(dragClass);
       });
 
       element.on('dragenter', function () {

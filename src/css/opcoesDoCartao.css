@@ -7,6 +7,10 @@
     white-space: nowrap;
 }
 
+.cartao--drag .opcoesDoCartao {
+  display: none;
+}
+
 .opcoesDoCartao-opcao {
     display: inline-block;
     vertical-align: middle;

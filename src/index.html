@@ -47,7 +47,7 @@
         <input type="submit" value="Salvar" class="novoCartao-salvar">
     </form>
     <section class="container mural" ng-class="{'mural--linhas': emLinhas}">
-      <div ng-repeat="cartao in cartoes | filter: { conteudo: busca}" draggable="true" draggable-list="cartoes" draggable-item="cartao" drop-class="cartao--drop" drop-event="precisaSincronizar" ng-class="{'cartao--textoGrande':tipo(cartao.conteudo)=='G','cartao--textoMedio':tipo(cartao.conteudo)=='M','cartao--textoPequeno':tipo(cartao.conteudo)=='P'}" style="background-color: {{cartao.cor}}" class="cartao">
+      <div ng-repeat="cartao in cartoes | filter: { conteudo: busca}" draggable="true" draggable-list="cartoes" draggable-item="cartao" drag-class="cartao--drag" drop-class="cartao--drop" drop-event="precisaSincronizar" ng-class="{'cartao--textoGrande':tipo(cartao.conteudo)=='G','cartao--textoMedio':tipo(cartao.conteudo)=='M','cartao--textoPequeno':tipo(cartao.conteudo)=='P'}" style="background-color: {{cartao.cor}}" class="cartao">
       		<div class="opcoesDoCartao">
       			<button class="opcoesDoCartao-opcao opcoesDoCartao-remove" ng-click="remove(cartao)">Remover</button>
       			<div class="opcoesDoCartao-cores">
